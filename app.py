@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash,session
 import cv2
 from forms import RegistrationForm  
 import numpy as np
@@ -44,15 +44,15 @@ def user_register_actions():
         cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM registration_details WHERE loginid = %s", [loginid])
         existing_user = cur.fetchone()
-
+        
         if existing_user:
             flash('Login ID already exists. Please choose another.', 'error')
             return redirect(url_for('register_page'))
-
+         
         cur.execute("INSERT INTO registration_details (name, loginid, password, mobile, email, roadno, city, state, pincode) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (name, loginid, password, mobile, email, roadno, city, state, pincode))
         mysql.connection.commit()
         cur.close()
-
+        
         flash('User registered successfully!', 'success')
         return redirect(url_for('login_page'))
 
@@ -71,6 +71,7 @@ def user_login_check():
 
         if user:
             flash('Login successful!', 'success')
+            session['user']={'name':user[0],'loginid':user[1], 'password':user[2], 'mobile':user[3], 'email':user[4], 'roadno':user[5], 'city':user[6], 'state':user[7], 'pincode':user[8]}
             return redirect(url_for('index'))  
         else:
             flash('Invalid login credentials. Please try again.', 'error')
@@ -78,10 +79,11 @@ def user_login_check():
 
 @app.route('/dashboard', endpoint='dashboard_page')
 def dashboard():
+    user=session.get('user')
     cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM image")
+    cur.execute("SELECT * FROM image where loginId = %s",(user.loginId))
     image_data = cur.fetchall()
-    cur.execute("SELECT * FROM livestream")
+    cur.execute("SELECT * FROM livestream where loginId = %s",(user.loginId))
     livestream_data = cur.fetchall()
     cur.close()
     return render_template('dashboard.html', imagedata=image_data, videodata=livestream_data)
