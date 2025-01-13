@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Stress Detection App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body style="padding-bottom: 150px;"><div class="webpage" >
+    <div class="webpage_container">
+                <div class="webpage_content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col text-center">
+                                <div class="webpage_title" style="padding-top:50px;">Register</div>
+
+                                <form action="{{ url_for('user_register_actions') }}" method="POST" class="webpage_form" style="width:100%">
+                                        
+                                        <table>
+                                            <tr>
+                                                <td >User Name</td>
+                                                <td>{{form.name()}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td >Login ID</td>
+                                                <td>{{form.loginid()}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Password</td>
+                                                <td>{{form.password()}}</td>
+                                            </tr>
+                                         
+                                            <tr>
+                                                <td></td>
+                                                <td style="font-size: 12px; color: rgb(255, 0, 242);">Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.</td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td>Mobile</td>
+                                                <td>{{form.mobile()}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Email</td>
+                                                <td>{{form.email()}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td >Road no</td>
+                                                <td>{{form.roadno()}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td >City</td>
+                                                <td>{{form.city()}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>State</td>
+                                                <td>{{form.state()}}</td>
+                                            </tr>
+                                            <tr>
+                                                <tr>
+                                                    <td>Pincode</td>
+                                                    <td>{{form.pincode()}}</td>
+                                                </tr>
+                                                <td>{{form.status}}</td>
+                                            </tr>
+                                        </table>
+                                        <center><button type="submit" class="btn btn-block btn-dark text-white py-3 px-5">Register</button>
+                                            <br>
+                                            <p style="margin-top: 20px;" >Already registered? <a href="/login" >Login here</a></p></center>
+                                                <br>
+                                    </form>
+                             
+                                {% for message in get_flashed_messages() %}
+                                    <font color='GREEN'>{{ message }}</font>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

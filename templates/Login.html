@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Stress Detection App</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="webpage">
+  <div class="webpage_container">
+                <div class="webpage_content">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col text-center">
+                              <div class="webpage_title"><span>Login In</span> </div>
+                              
+                              <div class="webpage_form_container">
+                                  <p>
+                                  <center>
+                                  <form action="{{ url_for('user_login_check') }}" method="POST"  style="width:50%">
+                                     
+                                      <table>
+                                          <div class="form-group row">
+                                              <div class="col-md-12">
+                                                  <input type="text" class="form-control" name="loginid" required placeholder="Enter Login Id">
+                                              </div>
+                                          </div>
+                                          <div class="form-group row">
+                                              <div class="col-md-12">
+                                                  <input type="password" class="form-control" name="password" required placeholder="Enter password">
+                                              </div>
+                                          </div>
+                                          <tr>
+                                              <td>
+                                                  <button class="btn btn-block btn-dark text-white py-3 px-5" style="margin-left:20%;" type="submit">
+                                                      Login
+                                                  </button>
+                                              </td>
+                                          </tr>
+                                          {% with messages = get_flashed_messages() %}
+                                              {% if messages %}
+                                                  {% for message in messages %}
+                                                      <font color='GREEN'> {{ message }}</font>
+                                                  {% endfor %}
+                                              {% endif %}
+                                          {% endwith %}
+                                      </table>
+                                  </form>
+                                  </center>
+                                  </p>
+                              </div>
+                            
+                              <p class="text-light" style="margin-top: 20px;">Don't have an account? <a href="/register" class="text-light">Register here</a></p>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+</body>
+</html>
+

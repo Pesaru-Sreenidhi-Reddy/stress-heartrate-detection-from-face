@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Stress Detection App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="features">
+  <div class="container">
+      <div class="row">
+          <div class="col">
+              <div class="section_title_container text-center">
+                  <h2 class="section_title"><span>Image Results</span></h2>
+              </div>
+              <center>
+                  <font color="Black">
+                      <table border="2px" class="table table-hover table-dark">
+                          <thead>
+                              <tr class="table-danger">
+                                  <th scope="col">S.No</th>
+                                  <th scope="col">File Name</th>
+                                  <th scope="col">Stress</th>
+                                  <th scope="col">Health Tip</th>
+                                  <th scope="col">Date and Time</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              {% for i in imagedata %}
+                              <tr scope="row" style="color: BLUE; background-color:#FFFCBB">
+                                  <td>{{ loop.index }}</td>
+                                  <td>{{ i.filename }}</td>
+                                  <td>{{ i.stress }}</td>
+                                  <td>{{ i.health_tip }}</td>
+                                  <td>{{ i.cdate }}</td>
+                              </tr>
+                              {% endfor %}
+                          </tbody>
+                      </table>
+                  </font>
+              </center>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="features">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="section_title_container text-center">
+                    <h2 class="section_title"><span>Livestream Results</span></h2>
+                </div>
+                <center>
+                    <font color="Black">
+                        <table border="2px" class="table table-hover table-dark">
+                            <thead>
+                                <tr class="table-danger">
+                                    <th scope="col">S.No</th>
+                                    <th scope="col">Stress</th>
+                                    <th scope="col">Heart Rate</th>
+                                    <th scope="col">Health Tip</th>
+                                    <th scope="col">Date and Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in videodata %}
+                                <tr scope="row" style="color: BLUE; background-color:#FFFCBB">
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ i.stress }}</td>
+                                    <td>{{ i.heart_rate }}</td>
+                                    <td>{{ i.health_tip }}</td>
+                                    <td>{{ i.cdate }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </font>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
