@@ -2,7 +2,7 @@ pip install all required libraries like flask, flask-mysql db, tensorflow etc.
 
 install mysql database and configure database.
 
-run bing image downloaader.ipynb to create images.
+run bing image download.ipynb to create images.
 
 run data augmentation to augment images created initially.
 
